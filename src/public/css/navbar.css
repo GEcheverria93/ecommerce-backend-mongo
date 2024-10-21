@@ -1,0 +1,26 @@
+/* Estilos para el navbar */
+nav {
+    background-color: #007bff; /* Color de fondo del navbar */
+    padding: 10px; /* Espaciado interno */
+}
+
+nav ul {
+    list-style: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+    display: flex; /* Flexbox para alinear horizontalmente */
+    justify-content: center; /* Centrar elementos */
+}
+
+nav li {
+    margin: 0 15px; /* Margen entre elementos */
+}
+
+nav a {
+    color: white; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    font-weight: bold; /* Negrita */
+}
+
+nav a:hover {
+    text-decoration: underline; /* Subrayar al pasar el mouse */
+}
