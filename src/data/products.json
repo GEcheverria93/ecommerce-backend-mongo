@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "title": "Laptop Lenovo",
+        "description": "16gb RAM, 1TB nvme vs m.2, 3060RTX",
+        "code": "CB690",
+        "price": 3000,
+        "status": true,
+        "stock": 1,
+        "category": "Pc's and Laptops",
+        "thumbnails": ["laptop-CB690.jpg"]
+    },
+    {
+        "id": 2,
+        "title": "Desktop Computer Asus",
+        "description": "32b RAM, 2TB nvme vs m.2, 4090RTX",
+        "code": "PSE200",
+        "price": 6000,
+        "status": true,
+        "stock": 1,
+        "category": "Pc's and Laptops",
+        "thumbnails": ["desktop-PSE200.jpg"]
+    }
+]
