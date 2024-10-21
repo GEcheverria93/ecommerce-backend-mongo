@@ -1,12 +1,20 @@
-<h1>
-    Lista de productos
-</h1>
+<header>
+    <h1>Bienvenido a la Tienda Electrónica</h1>
+</header>
 
-<ul>
+<div id='products-container'>
     {{#each products}}
-        <li>
-            {{title}}
-            - ${{price}}
-        </li>
+        <article class='product'>
+            <img src='./images/{{image}}' alt='{{title}}' />
+            <div>
+                <span class='product-title'>{{title}}</span>
+                <p class='product-price'>${{price}}</p>
+                <button class='add-to-cart-btn' data-product-id='{{id}}'>Añadir
+                    al carrito</button>
+            </div>
+        </article>
     {{/each}}
-</ul>
+</div>
+
+<link rel='stylesheet' href='/css/home.css' />
+<script src='/js/home.js' defer></script>
