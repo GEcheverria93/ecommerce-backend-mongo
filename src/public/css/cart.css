@@ -1,0 +1,31 @@
+/* Estilos para el carrito */
+#cart-container {
+    margin: 20px;
+}
+
+#cart-list {
+    list-style: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+}
+
+.total-price {
+    font-weight: bold; /* Negrita */
+    margin: 10px 0; /* Margen */
+}
+
+.btn-buy,
+.btn-clear {
+    background-color: #007bff; /* Color del botón */
+    border: none; /* Sin borde */
+    border-radius: 3px; /* Bordes redondeados */
+    color: white; /* Color del texto */
+    cursor: pointer; /* Cambiar cursor al pasar */
+    padding: 10px; /* Espaciado interno */
+    margin-top: 10px; /* Margen superior */
+    width: 100%; /* Ancho completo */
+}
+
+.btn-buy:hover,
+.btn-clear:hover {
+    background-color: #0056b3; /* Color al pasar el mouse */
+}
