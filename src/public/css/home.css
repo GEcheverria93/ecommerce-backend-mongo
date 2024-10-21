@@ -1,0 +1,190 @@
+header {
+    background-color: #007bff;
+    /* Color de fondo del header */
+    color: white;
+    /* Color del texto */
+    padding: 20px;
+    /* Espaciado interno */
+    text-align: center;
+    /* Centrar el texto */
+}
+
+/* Contenedor de productos */
+#products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Centrar productos */
+    padding: 20px;
+    /* Espaciado interno */
+}
+
+/* Estilos para cada producto */
+.product {
+    border: 1px solid #ccc;
+    /* Borde del producto */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    margin: 10px;
+    /* Margen entre productos */
+    padding: 10px;
+    /* Espaciado interno */
+    text-align: center;
+    /* Centrar texto */
+    width: 200px;
+    /* Ancho fijo */
+    background-color: white;
+    /* Color de fondo del producto */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Sombra */
+}
+
+.product img {
+    max-width: 100%;
+    /* Ajustar imagen al contenedor */
+    height: auto;
+    /* Mantener proporciones */
+}
+
+.product-title {
+    display: block;
+    /* Mostrar como bloque */
+    font-weight: bold;
+    /* Negrita */
+}
+
+.product-price {
+    font-weight: bold;
+    /* Negrita */
+    color: #28a745;
+    /* Color verde para el precio */
+}
+
+.add-to-cart-btn {
+    background-color: #007bff;
+    /* Color del botón */
+    border: none;
+    /* Sin borde */
+    border-radius: 3px;
+    /* Bordes redondeados */
+    color: white;
+    /* Color del texto */
+    cursor: pointer;
+    /* Cambiar cursor al pasar */
+    padding: 10px;
+    /* Espaciado interno */
+    width: 100%;
+    /* Ancho completo */
+    margin-top: 10px;
+    /* Margen superior */
+}
+
+.add-to-cart-btn:hover {
+    background-color: #0056b3;
+    /* Color al pasar el mouse */
+}
+
+/* Estilos para el carrito */
+#cart {
+    background-color: #f9f9f9;
+    /* Color de fondo del carrito */
+    border-left: 1px solid #ccc;
+    /* Borde izquierdo */
+    position: fixed;
+    /* Fijo en la pantalla */
+    right: 0;
+    /* A la derecha */
+    top: 0;
+    /* Arriba */
+    height: 100%;
+    /* Altura completa */
+    padding: 20px;
+    /* Espaciado interno */
+}
+
+/* Estilos para el carrito abierto y cerrado */
+.cart-closed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4vw;
+    /* Ancho cerrado */
+}
+
+.cart-open {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    /* Ancho abierto */
+}
+
+/* Estilos para la lista del carrito */
+.cart-list {
+    display: none;
+    /* Inicialmente oculto */
+    list-style: none;
+    /* Sin viñetas */
+    padding: 0;
+    /* Sin padding */
+    flex-direction: column;
+    /* Columna */
+    align-items: center;
+    /* Centrar elementos */
+}
+
+/* Estilos para el precio total */
+.total-price {
+    font-weight: bold;
+    /* Negrita */
+    text-align: center;
+    /* Centrar texto */
+    margin: 10px 0;
+    /* Margen */
+    padding: 10px;
+    /* Espaciado interno */
+    border: 1px solid #ccc;
+    /* Borde */
+}
+
+/* Estilos para botones de compra y limpiar */
+.btn-buy,
+.btn-clear {
+    background-color: #007bff;
+    /* Color del botón */
+    border: none;
+    /* Sin borde */
+    border-radius: 3px;
+    /* Bordes redondeados */
+    color: white;
+    /* Color del texto */
+    cursor: pointer;
+    /* Cambiar cursor al pasar */
+    display: block;
+    /* Mostrar como bloque */
+    margin-top: 10px;
+    /* Margen superior */
+    padding: 10px;
+    /* Espaciado interno */
+    width: 100%;
+    /* Ancho completo */
+}
+
+.btn-buy:hover,
+.btn-clear:hover {
+    background-color: #0056b3;
+    /* Color al pasar el mouse */
+}
+
+/* Estilos para el historial */
+.empty-history {
+    text-align: center;
+    /* Centrar texto */
+    margin-top: 50px;
+    /* Margen superior */
+    font-weight: 500;
+    /* Negrita */
+    color: grey;
+    /* Color gris */
+}
