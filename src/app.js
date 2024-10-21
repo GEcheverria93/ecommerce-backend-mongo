@@ -20,6 +20,14 @@ app.engine(
         defaultLayout: 'main',
         layoutsDir: path.join(__dirname, 'views', 'layouts'),
         partialsDir: path.join(__dirname, 'views', 'partials'),
+        helpers: {
+            calculateTotal: (products) =>
+                products.reduce(
+                    (total, product) =>
+                        total + product.price * product.quantity,
+                    0
+                ),
+        },
     })
 );
 

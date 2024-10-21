@@ -1,12 +1,28 @@
 <div id='cart-container'>
     <ul id='cart-list'>
-        <!-- Aquí se llenará la lista de productos del carrito -->
+        {{#each carts}}
+            <li>
+                <h2>Carrito ID: {{id}}</h2>
+                <ul>
+                    {{#each products}}
+                        <li>
+                            Producto:
+                            {{title}}
+                            - Cantidad:
+                            {{quantity}}
+                            - Precio: ${{price}}
+                        </li>
+                    {{/each}}
+                </ul>
+                <div class='total-price'>
+                    Total: ${{calculateTotal products}}
+                    <!-- Calcular el total del carrito -->
+                </div>
+                <button class='btn-buy' data-cart-id='{{id}}'>Comprar</button>
+                <button class='btn-clear' data-cart-id='{{id}}'>Limpiar carrito</button>
+            </li>
+        {{/each}}
     </ul>
-    <div class='total-price' id='total-price'>
-        Total: $0
-    </div>
-    <button class='btn-buy'>Comprar</button>
-    <button class='btn-clear'>Limpiar carrito</button>
 </div>
 
 <link rel='stylesheet' href='/css/cart.css' />
