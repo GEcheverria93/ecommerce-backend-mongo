@@ -5,8 +5,12 @@ const path = require('path');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const viewsRoutes = require('./routes/views.router');
+const connectDB = require('./db');
 
 const app = express();
+
+// Conectar a la base de datos
+connectDB();
 
 // middlewares
 app.use(cors());
