@@ -2,19 +2,55 @@
     <h1>Bienvenido a la Tienda Electrónica</h1>
 </header>
 
-<div id='products-container'>
+<div id="filter-container">
+    <form id="filter-form" method="GET" action="/">
+        <label for="limit">Límite:</label>
+        <select name="limit" id="limit">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+        </select>
+
+        <label for="page">Página:</label>
+        <input type="number" name="page" id="page" value="{{page}}" min="1" />
+
+        <label for="sort">Ordenar por precio:</label>
+        <select name="sort" id="sort">
+            <option value="">Sin ordenar</option>
+            <option value="asc" {{#if (eq sort "asc")}}selected{{/if}}>Ascendente</option>
+            <option value="desc" {{#if (eq sort "desc")}}selected{{/if}}>Descendente</option>
+        </select>
+
+        <label for="query">Buscar por categoría:</label>
+        <input type="text" name="query" id="query" placeholder="Categoría" value="{{query}}" />
+
+        <button type="submit">Filtrar</button>
+    </form>
+</div>
+
+<div id="products-container">
     {{#each products}}
-        <article class='product'>
-            <img src='./images/{{image}}' alt='{{title}}' />
+        <article class="product">
+            <img src="./images/{{thumbnails.[0]}}" alt="{{title}}" />
             <div>
-                <span class='product-title'>{{title}}</span>
-                <p class='product-price'>${{price}}</p>
-                <button class='add-to-cart-btn' data-product-id='{{id}}'>Añadir
-                    al carrito</button>
+                <span class="product-title">{{title}}</span>
+                <p class="product-price">${{price}}</p>
+                <button class="add-to-cart-btn" data-product-id="{{_id}}">Añadir al carrito</button>
             </div>
         </article>
     {{/each}}
 </div>
 
-<link rel='stylesheet' href='/css/home.css' />
-<script src='/js/home.js' defer></script>
+<div id="pagination">
+    {{#if hasPrevPage}}
+        <a href="/?page={{prevPage}}&limit={{../limit}}&sort={{../sort}}&query={{../query}}">Página Anterior</a>
+    {{/if}}
+    <span>Página {{page}} de {{totalPages}}</span>
+    {{#if hasNextPage}}
+        <a href="/?page={{nextPage}}&limit={{../limit}}&sort={{../sort}}&query={{../query}}">Página Siguiente</a>
+    {{/if}}
+</div>
+
+<link rel="stylesheet" href="/css/home.css" />
+<script src="/js/home.js" defer></script>

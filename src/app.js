@@ -24,6 +24,10 @@ app.engine(
         defaultLayout: 'main',
         layoutsDir: path.join(__dirname, 'views', 'layouts'),
         partialsDir: path.join(__dirname, 'views', 'partials'),
+        runtimeOptions: {
+            allowProtoPropertiesByDefault: true,
+            allowProtoMethodsByDefault: true,
+        },
         helpers: {
             calculateTotal: (products) =>
                 products.reduce(
@@ -31,6 +35,7 @@ app.engine(
                         total + product.price * product.quantity,
                     0
                 ),
+            eq: (a, b) => a === b,
         },
     })
 );

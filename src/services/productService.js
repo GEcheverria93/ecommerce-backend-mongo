@@ -20,15 +20,53 @@ const generateNewProductId = (products) =>
 
 const getAllProducts = async (req, res) => {
     try {
-        const limit = parseInt(req.query.limit, 10);
-        const products = limit
-            ? await Product.find().limit(limit)
-            : await Product.find();
-        return res.json(products);
+        const limit = parseInt(req.query.limit, 10) || 10; // Establecer un límite por defecto
+        const page = parseInt(req.query.page, 10) || 1; // Establecer una página por defecto
+
+        // Calcular el número de documentos a omitir
+        const skip = (page - 1) * limit;
+
+        // Inicializar el objeto de filtros
+        const filters = {};
+
+        // Aplicar filtro por categoría si se proporciona
+        if (req.query.query) {
+            filters.category = { $regex: new RegExp(req.query.query, 'i') }; // Insensible a mayúsculas
+        }
+
+        // Inicializar el objeto de ordenamiento
+        const sort = {};
+        if (req.query.sort === 'asc') {
+            sort.price = 1; // Ordenar ascendentemente por precio
+        } else if (req.query.sort === 'desc') {
+            sort.price = -1; // Ordenar descendentemente por precio
+        }
+
+        // Obtener todos los productos con paginación, filtros y ordenamiento
+        const products = await Product.find(filters)
+            .sort(sort)
+            .skip(skip)
+            .limit(limit);
+
+        const totalDocs = await Product.countDocuments(filters); // Contar el total de documentos con filtros
+
+        const totalPages = Math.ceil(totalDocs / limit); // Calcular el total de páginas
+
+        const response = {
+            status: 'success',
+            payload: products,
+            totalPages,
+            prevPage: page > 1 ? page - 1 : null,
+            nextPage: page < totalPages ? page + 1 : null,
+            page,
+            hasPrevPage: page > 1,
+            hasNextPage: page < totalPages,
+        };
+
+        return response; // Devuelve la respuesta en el formato requerido
     } catch (error) {
-        return res
-            .status(500)
-            .json({ message: 'Error al obtener productos', error });
+        console.error('Error al obtener productos:', error);
+        throw error; // Lanza el error para que pueda ser manejado en el enrutador
     }
 };
 
