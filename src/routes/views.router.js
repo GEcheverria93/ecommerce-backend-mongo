@@ -1,7 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 const express = require('express');
 const { getAllProducts } = require('../services/productService');
-const { readCarts } = require('../services/cartService'); // Importar la función para leer carritos
+const { getAllCarts } = require('../services/cartService'); // Importar la nueva función para obtener carritos
 
 const router = express.Router();
 
@@ -27,27 +27,17 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/cart', (req, res) => {
-    const carts = readCarts(); // Leer los carritos
-    const products = []; // Leer los productos
-
-    // Mapear los carritos para incluir la información completa de los productos
-    const cartsWithProductDetails = carts.map((cart) => ({
-        ...cart,
-        products: cart.products.map((cartProduct) => {
-            const product = products.find((p) => p.id === cartProduct.product);
-            return {
-                ...cartProduct,
-                title: product ? product.title : 'Producto no encontrado',
-                price: product ? product.price : 0,
-            };
-        }),
-    }));
-
-    res.render('cart', {
-        title: 'Carrito de Compras',
-        carts: cartsWithProductDetails,
-    }); // Pasar los carritos con detalles a la vista
+router.get('/cart', async (req, res) => {
+    try {
+        const carts = await getAllCarts(); // Obtener los carritos desde la base de datos
+        res.render('cart', {
+            title: 'Carrito de Compras',
+            carts, // Pasar los carritos directamente a la vista
+        });
+    } catch (error) {
+        console.error('Error al obtener carritos:', error);
+        res.status(500).json({ message: 'Error al obtener carritos', error });
+    }
 });
 
 module.exports = router;

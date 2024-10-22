@@ -32,7 +32,7 @@ app.engine(
             calculateTotal: (products) =>
                 products.reduce(
                     (total, product) =>
-                        total + product.price * product.quantity,
+                        total + product.product.price * product.quantity,
                     0
                 ),
             eq: (a, b) => a === b,
