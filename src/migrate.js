@@ -18,7 +18,7 @@ const migrate = async () => {
             price: 3000,
             status: true,
             stock: 1,
-            category: "Pc's and Laptops",
+            category: 'Laptop',
             thumbnails: ['laptop-CB690.jpg'],
         },
         {
@@ -28,7 +28,7 @@ const migrate = async () => {
             price: 6000,
             status: true,
             stock: 1,
-            category: "Pc's and Laptops",
+            category: 'Desktop',
             thumbnails: ['desktop-PSE200.jpg'],
         },
     ];
