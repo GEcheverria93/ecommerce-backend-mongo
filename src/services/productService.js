@@ -1,6 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 const fS = require('fs');
 const path = require('path');
+const Product = require('../models/product.model');
 
 const productsFilePath = path.join(__dirname, '../data/products.json');
 
@@ -17,28 +18,36 @@ const writeProducts = (products) => {
 const generateNewProductId = (products) =>
     Math.max(...products.map((p) => Number(p.id)), 0) + 1;
 
-const getAllProducts = (req, res) => {
-    const products = readProducts();
-    const limit = parseInt(req.query.limit, 10);
-    // eslint-disable-next-line no-restricted-globals
-    if (limit && !isNaN(limit)) {
-        return res.json(products.slice(0, limit));
+const getAllProducts = async (req, res) => {
+    try {
+        const limit = parseInt(req.query.limit, 10);
+        const products = limit
+            ? await Product.find().limit(limit)
+            : await Product.find();
+        return res.json(products);
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ message: 'Error al obtener productos', error });
     }
-    return res.json(products);
 };
 
-const getProduct = (req, res) => {
+const getProduct = async (req, res) => {
     const { pid } = req.params;
-    const products = readProducts();
-    const product = products.find((p) => p.id === Number(pid));
-    if (!product) {
-        return res.status(404).json({ message: 'producto no encontrado' });
+    try {
+        const product = await Product.findById(pid);
+        if (!product) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+        return res.json(product);
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ message: 'Error al obtener el producto', error });
     }
-    return res.json(product);
 };
 
-const addNewProduct = (req, res) => {
-    const products = readProducts();
+const addNewProduct = async (req, res) => {
     const {
         title,
         description,
@@ -49,8 +58,7 @@ const addNewProduct = (req, res) => {
         category,
         thumbnails,
     } = req.body;
-    const newProduct = {
-        id: generateNewProductId(products),
+    const newProduct = new Product({
         title,
         description,
         code,
@@ -59,55 +67,48 @@ const addNewProduct = (req, res) => {
         stock,
         category,
         thumbnails,
-    };
+    });
 
-    // Validación de campos obligatorios
-    if (
-        !newProduct.title ||
-        !newProduct.description ||
-        !newProduct.code ||
-        newProduct.price == null ||
-        newProduct.stock == null ||
-        !newProduct.category
-    ) {
-        return res.status(400).json({
-            message: 'Todos los campos excepto thumbnails son obligatorios',
+    try {
+        const savedProduct = await newProduct.save();
+        return res.status(201).json(savedProduct);
+    } catch (error) {
+        return res
+            .status(400)
+            .json({ message: 'Error al agregar el producto', error });
+    }
+};
+
+const updateProduct = async (req, res) => {
+    const { pid } = req.params;
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(pid, req.body, {
+            new: true,
         });
+        if (!updatedProduct) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+        return res.json(updatedProduct);
+    } catch (error) {
+        return res
+            .status(400)
+            .json({ message: 'Error al actualizar el producto', error });
     }
-    products.push(newProduct);
-    writeProducts(products);
-
-    return res.status(201).json(newProduct);
 };
 
-const updateProduct = (req, res) => {
+const deleteProduct = async (req, res) => {
     const { pid } = req.params;
-    const products = readProducts();
-    const index = products.findIndex((p) => p.id === Number(pid));
-    if (index === -1) {
-        return res.status(404).json({ message: 'producto no encontrado' });
+    try {
+        const deletedProduct = await Product.findByIdAndDelete(pid);
+        if (!deletedProduct) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+        return res.status(204).send();
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ message: 'Error al eliminar el producto', error });
     }
-    const updatedProduct = {
-        ...products[index],
-        ...req.body,
-        id: products[index].id,
-    };
-
-    products[index] = updatedProduct;
-    writeProducts(products);
-    return res.json(updatedProduct);
-};
-
-const deleteProduct = (req, res) => {
-    const { pid } = req.params;
-    const products = readProducts();
-    const filteredProducts = products.filter((p) => p.id !== Number(pid));
-
-    if (filteredProducts.length === products.length) {
-        return res.status(404).json({ message: 'producto no encontrado' });
-    }
-    writeProducts(filteredProducts);
-    return res.status(204).send();
 };
 
 module.exports = {
