@@ -1,7 +1,8 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 const fS = require('fs');
 const path = require('path');
-const { readProducts } = require('./productService');
+const Cart = require('../models/cart.model');
+const Product = require('../models/product.model');
 
 const cartsFilePath = path.join(__dirname, '../data/carts.json');
 
@@ -17,48 +18,66 @@ const writeCarts = (carts) => {
 const generateNewCartId = (carts) =>
     Math.max(...carts.map((c) => Number(c.id)), 0) + 1;
 
-const addNewCart = (req, res) => {
+const addNewCart = async (req, res) => {
     const { products } = req.body;
-    const carts = readCarts();
-    const newCart = {
-        id: generateNewCartId(carts),
-        products: products || [],
-    };
-    carts.push(newCart);
-    writeCarts(carts);
-    return res.status(201).json(newCart);
+    const newCart = new Cart({ products: products || [] });
+
+    try {
+        const savedCart = await newCart.save();
+        return res.status(201).json(savedCart);
+    } catch (error) {
+        return res
+            .status(400)
+            .json({ message: 'Error al agregar el carrito', error });
+    }
 };
 
-const getProductsByCartId = (req, res) => {
+const getProductsByCartId = async (req, res) => {
     const { cid } = req.params;
-    const carts = readCarts();
-    const cart = carts.find((c) => c.id === Number(cid));
-    if (!cart) {
-        return res.status(404).json({ message: 'carrito no encontrado' });
+    try {
+        const cart = await Cart.findById(cid).populate('products.product');
+        if (!cart) {
+            return res.status(404).json({ message: 'Carrito no encontrado' });
+        }
+        return res.json(cart.products);
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Error al obtener los productos del carrito',
+            error,
+        });
     }
-    return res.json(cart.products);
 };
 
-const addProductToCart = (req, res) => {
+const addProductToCart = async (req, res) => {
     const { cid, pid } = req.params;
-    const carts = readCarts();
-    const products = readProducts();
-    const cart = carts.find((c) => c.id === Number(cid));
-    if (!cart) {
-        return res.status(404).json({ message: 'carrito no encontrado' });
+    try {
+        const cart = await Cart.findById(cid);
+        if (!cart) {
+            return res.status(404).json({ message: 'Carrito no encontrado' });
+        }
+
+        const product = await Product.findById(pid);
+        if (!product) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+
+        const cartProduct = cart.products.find(
+            (p) => p.product.toString() === pid
+        );
+        if (cartProduct) {
+            cartProduct.quantity += 1;
+        } else {
+            cart.products.push({ product: pid, quantity: 1 });
+        }
+
+        await cart.save();
+        return res.status(201).json(cart);
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Error al agregar el producto al carrito',
+            error,
+        });
     }
-    const product = products.find((p) => p.id === Number(pid));
-    if (!product) {
-        return res.status(404).json({ message: 'producto no encontrado' });
-    }
-    const cartProduct = cart.products.find((p) => p.product === Number(pid));
-    if (cartProduct) {
-        cartProduct.quantity += 1;
-    } else {
-        cart.products.push({ product: Number(pid), quantity: 1 });
-    }
-    writeCarts(carts);
-    return res.status(201).json(cart);
 };
 
 module.exports = {
