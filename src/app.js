@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
-const viewsRoutes = require('./routes/views.router');
+const viewsRoutes = require('./routes/viewsRoutes');
 const connectDB = require('./db');
 
 const app = express();

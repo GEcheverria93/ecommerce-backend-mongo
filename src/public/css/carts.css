@@ -59,8 +59,9 @@ h1 {
     /* Margen */
 }
 
-.btn-buy,
-.btn-clear {
+.btn-increase,
+.btn-decrease,
+.btn-delete-cart {
     background-color: #007bff;
     /* Color del botón */
     border: none;
@@ -71,18 +72,21 @@ h1 {
     /* Color del texto */
     cursor: pointer;
     /* Cambiar cursor al pasar */
-    padding: 10px;
-    /* Espaciado interno */
-    margin-top: 10px;
-    /* Margen superior */
-    width: 100%;
-    /* Ancho completo */
+    padding: 5px 10px;
+    /* Espaciado interno reducido */
+    margin-top: 5px;
+    /* Margen superior reducido */
+    width: auto;
+    /* Ancho automático */
     transition: background-color 0.3s;
     /* Transición suave */
+    font-size: 14px;
+    /* Tamaño de fuente reducido */
 }
 
-.btn-buy:hover,
-.btn-clear:hover {
+.btn-increase:hover,
+.btn-decrease:hover,
+.btn-delete-cart:hover {
     background-color: #0056b3;
     /* Color al pasar el mouse */
 }
@@ -114,4 +118,41 @@ h1 {
 #pagination a:hover {
     background-color: #0056b3;
     /* Color al pasar el mouse */
+}
+
+.button-group {
+    display: flex;
+    gap: 5px;
+    /* Espacio entre los botones */
+    margin-top: 5px;
+    /* Margen superior para separar de la descripción */
+}
+
+.btn-remove,
+#btn-clear-all {
+    background-color: #dc3545;
+    /* Color rojo para indicar eliminación */
+    border: none;
+    /* Sin borde */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    color: white;
+    /* Color del texto */
+    cursor: pointer;
+    /* Cambiar cursor al pasar */
+    padding: 5px 10px;
+    /* Espaciado interno reducido */
+    margin-top: 5px;
+    /* Margen superior reducido */
+    width: auto;
+    /* Ancho automático */
+    transition: background-color 0.3s;
+    /* Transición suave */
+    font-size: 14px;
+    /* Tamaño de fuente reducido */
+}
+
+#btn-clear-all:hover {
+    background-color: #c82333;
+    /* Color más oscuro al pasar el mouse */
 }

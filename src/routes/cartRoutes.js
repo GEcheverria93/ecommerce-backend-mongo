@@ -9,6 +9,7 @@ const {
     clearCart,
     getAllCarts,
 } = require('../services/cartService');
+const Cart = require('../models/cartModel');
 
 const router = express.Router();
 
@@ -39,5 +40,20 @@ router.put('/:cid', updateCart);
 router.put('/:cid/products/:pid', updateProductQuantity);
 
 router.delete('/:cid', clearCart);
+
+router.delete('/', async (req, res) => {
+    try {
+        await Cart.deleteMany(); // Eliminar todos los carritos
+        res.status(200).json({
+            message: 'Todos los carritos han sido eliminados',
+        });
+    } catch (error) {
+        console.error('Error al eliminar todos los carritos:', error);
+        res.status(500).json({
+            message: 'Error al eliminar todos los carritos',
+            error,
+        });
+    }
+});
 
 module.exports = router;

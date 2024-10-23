@@ -2,7 +2,7 @@
 const express = require('express');
 const { getAllProducts } = require('../services/productService');
 const { getAllCarts } = require('../services/cartService'); // Importar la nueva función para obtener carritos
-const Cart = require('../models/cart.model');
+const Cart = require('../models/cartModel');
 
 const router = express.Router();
 

@@ -1,6 +1,5 @@
 <div id='cart-container'>
     <h1>Lista de Carritos</h1>
-    <!-- Título de la lista de carritos -->
     <div id='cart-list'>
         {{#each carts}}
             <div class='cart-card'>
@@ -8,19 +7,19 @@
                 <ul>
                     {{#each products}}
                         <li>
-                            Producto:
-                            {{this.product.title}}
-                            - Cantidad:
-                            {{this.quantity}}
-                            - Precio: ${{this.product.price}}
+                            Producto: {{this.product.title}} - Cantidad: <span class="quantity">{{this.quantity}}</span> - Precio: ${{this.product.price}}
+                            <div class="button-group">
+                                <button class='btn-increase' data-cart-id='{{../_id}}' data-product-id='{{this.product._id}}'>+</button>
+                                <button class='btn-decrease' data-cart-id='{{../_id}}' data-product-id='{{this.product._id}}'>-</button>
+                                <button class='btn-remove' data-cart-id='{{../_id}}' data-product-id='{{this.product._id}}'>Eliminar</button>
+                            </div>
                         </li>
                     {{/each}}
                 </ul>
                 <div class='total-price'>
                     Total: ${{calculateTotal products}}
                 </div>
-                <button class='btn-buy' data-cart-id='{{_id}}'>Comprar</button>
-                <button class='btn-clear' data-cart-id='{{_id}}'>Limpiar carrito</button>
+                <button class='btn-remove btn-delete-cart' data-cart-id='{{_id}}'>Eliminar Carrito</button>
             </div>
         {{/each}}
     </div>
@@ -32,7 +31,10 @@
             <a href='/carts?page={{inc currentPage}}&limit=10'>Siguiente</a>
         {{/if}}
     </div>
+    {{#if carts.length}}
+        <button id='btn-clear-all'>Eliminar Todos los Carritos</button>
+    {{/if}}
 </div>
 
-<link rel='stylesheet' href='/css/cart.css' />
-<script src='/js/cart.js' defer></script>
+<link rel='stylesheet' href='/css/carts.css' />
+<script src='/js/carts.js' defer></script>

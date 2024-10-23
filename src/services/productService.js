@@ -1,7 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 const fS = require('fs');
 const path = require('path');
-const Product = require('../models/product.model');
+const Product = require('../models/productModel');
 
 const productsFilePath = path.join(__dirname, '../data/products.json');
 

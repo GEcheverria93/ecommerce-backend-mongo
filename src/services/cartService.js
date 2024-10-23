@@ -1,8 +1,8 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 const fS = require('fs');
 const path = require('path');
-const Cart = require('../models/cart.model');
-const Product = require('../models/product.model');
+const Cart = require('../models/cartModel');
+const Product = require('../models/productModel');
 
 const cartsFilePath = path.join(__dirname, '../data/carts.json');
 
@@ -137,7 +137,15 @@ const updateProductQuantity = async (req, res) => {
                 .json({ message: 'Producto no encontrado en el carrito' });
         }
 
-        cartProduct.quantity = quantity;
+        if (quantity <= 0) {
+            // Eliminar el producto si la cantidad es cero o menor
+            cart.products = cart.products.filter(
+                (p) => p.product.toString() !== pid
+            );
+        } else {
+            cartProduct.quantity = quantity; // Actualizar la cantidad
+        }
+
         await cart.save();
         return res.status(200).json(cart);
     } catch (error) {
@@ -151,17 +159,14 @@ const updateProductQuantity = async (req, res) => {
 const clearCart = async (req, res) => {
     const { cid } = req.params;
     try {
-        const cart = await Cart.findById(cid);
+        const cart = await Cart.findByIdAndDelete(cid); // Eliminar el carrito
         if (!cart) {
             return res.status(404).json({ message: 'Carrito no encontrado' });
         }
-
-        cart.products = [];
-        await cart.save();
-        return res.status(200).json(cart);
+        return res.status(200).json({ message: 'Carrito eliminado' });
     } catch (error) {
         return res.status(500).json({
-            message: 'Error al limpiar el carrito',
+            message: 'Error al eliminar el carrito',
             error,
         });
     }

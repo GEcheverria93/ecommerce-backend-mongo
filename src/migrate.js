@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const connectDB = require('./db');
-const Product = require('./models/product.model');
-const Cart = require('./models/cart.model');
+const Product = require('./models/productModel');
+const Cart = require('./models/cartModel');
 
 dotenv.config();
 
