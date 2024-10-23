@@ -25,18 +25,25 @@ header {
     /* Borde del producto */
     border-radius: 5px;
     /* Bordes redondeados */
-    margin: 10px;
+    margin: 15px;
     /* Margen entre productos */
-    padding: 10px;
+    padding: 15px;
     /* Espaciado interno */
     text-align: center;
     /* Centrar texto */
-    width: 200px;
+    width: 220px;
     /* Ancho fijo */
     background-color: white;
     /* Color de fondo del producto */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     /* Sombra */
+    transition: transform 0.2s;
+    /* Transición suave */
+}
+
+.product:hover {
+    transform: scale(1.05);
+    /* Efecto de aumento al pasar el mouse */
 }
 
 .product img {
@@ -190,40 +197,244 @@ header {
 }
 
 #filter-container {
-    background-color: #f1f1f1; /* Color de fondo del contenedor de filtros */
-    padding: 20px; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
-    margin: 20px; /* Margen alrededor del contenedor */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex;
+    justify-content: center;
+    /* Centrar el contenedor */
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 #filter-form {
-    display: flex; /* Usar flexbox para alinear elementos */
-    flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
-    justify-content: space-between; /* Espaciado entre elementos */
+    display: flex;
+    justify-content: center;
+    /* Espaciado entre los grupos de filtros */
+    align-items: center;
+    /* Centrar verticalmente */
+    width: 100%;
+    /* Asegurarse de que el formulario ocupe todo el ancho */
+}
+
+#filter-form > div {
+    display: flex;
+    /* Usar flexbox para cada grupo de filtros */
+    align-items: center;
+    /* Centrar verticalmente */
+    margin-right: 35px;
+    /* Espaciado entre grupos de filtros */
 }
 
 #filter-form label {
-    margin-right: 10px; /* Margen a la derecha de las etiquetas */
+    margin-right: 5px;
+    /* Margen reducido a la derecha de las etiquetas */
 }
 
 #filter-form select,
 #filter-form input {
-    margin: 5px 0; /* Margen vertical */
-    padding: 5px; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde */
-    border-radius: 3px; /* Bordes redondeados */
+    margin: 0;
+    /* Sin margen entre etiquetas y inputs */
+    padding: 5px;
+    /* Espaciado interno */
+    border: 1px solid #ccc;
+    /* Borde */
+    border-radius: 3px;
+    /* Bordes redondeados */
+    height: 40px;
+    /* Altura fija para inputs y selects */
 }
 
 #filter-form button {
-    background-color: #007bff; /* Color del botón */
-    color: white; /* Color del texto */
-    border: none; /* Sin borde */
-    border-radius: 3px; /* Bordes redondeados */
-    padding: 10px; /* Espaciado interno */
-    cursor: pointer; /* Cambiar cursor al pasar */
+    background-color: #007bff;
+    /* Color del botón */
+    color: white;
+    /* Color del texto */
+    border: none;
+    /* Sin borde */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    padding: 10px 15px;
+    /* Espaciado interno */
+    cursor: pointer;
+    /* Cambiar cursor al pasar */
+    transition: background-color 0.3s;
+    /* Transición suave */
 }
 
 #filter-form button:hover {
-    background-color: #0056b3; /* Color al pasar el mouse */
+    background-color: #0056b3;
+    /* Color al pasar el mouse */
+}
+
+/* Estilos para el ícono del carrito */
+#cart-icon {
+    position: absolute;
+    /* Cambiar a posición absoluta */
+    top: 20px;
+    /* Ajustar la distancia desde la parte superior */
+    right: 20px;
+    /* Ajustar la distancia desde la derecha */
+    cursor: pointer;
+    /* Cambiar cursor al pasar */
+}
+
+/* Ajustar el tamaño del ícono del carrito */
+#cart-icon svg {
+    width: 24px;
+    /* Cambiar el tamaño del ícono del carrito */
+    height: 24px;
+    /* Cambiar el tamaño del ícono del carrito */
+}
+
+/* Estilos para el número de artículos */
+#cart-count {
+    position: absolute;
+    top: -5px;
+    /* Ajustar la posición vertical */
+    right: -5px;
+    /* Ajustar la posición horizontal */
+    background: red;
+    /* Fondo rojo */
+    color: white;
+    /* Color del texto */
+    border-radius: 50%;
+    /* Bordes redondeados */
+    padding: 2px 5px;
+    /* Espaciado interno */
+    font-size: 12px;
+    /* Cambiar el tamaño de la fuente */
+}
+
+/* Menú desplegable para el carrito */
+#cart-dropdown {
+    display: none;
+    /* Ocultar por defecto */
+    position: absolute;
+    /* Mantener posición absoluta */
+    top: 50px;
+    /* Ajustar la distancia desde la parte superior */
+    right: 20px;
+    /* Alinear con el ícono del carrito */
+    background: white;
+    /* Fondo blanco */
+    border: 1px solid #ccc;
+    /* Borde */
+    z-index: 1000;
+    /* Asegurarse de que esté por encima de otros elementos */
+    width: 200px;
+    /* Ancho del menú */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Sombra */
+    overflow: auto;
+    /* Permitir desplazamiento si es necesario */
+    max-height: 500px;
+    /* Altura máxima para el menú */
+}
+
+/* Estilos para las opciones del carrito */
+.cart-option {
+    padding: 10px;
+    /* Espaciado interno */
+    cursor: pointer;
+    /* Cambiar cursor al pasar */
+    transition: background-color 0.3s;
+    /* Transición suave para el fondo */
+    white-space: nowrap;
+    /* Evitar que el texto se divida en varias líneas */
+    overflow: hidden;
+    /* Ocultar el desbordamiento */
+    text-overflow: ellipsis;
+    /* Mostrar "..." si el texto es demasiado largo */
+}
+
+.cart-option:hover {
+    background-color: #f0f0f0;
+    /* Cambiar color al pasar el mouse */
+    font-weight: bold;
+    /* Negrita al pasar el mouse */
+}
+
+/* Estilos para el menú desplegable */
+#cart-select {
+    /* Estilo general del select */
+    padding: 10px;
+    /* Espaciado interno */
+    border: 1px solid #ccc;
+    /* Borde */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    background-color: white;
+    /* Color de fondo */
+    font-size: 14px;
+    /* Tamaño de fuente */
+    cursor: pointer;
+    /* Cambiar cursor al pasar */
+}
+
+/* Estilo para la opción seleccionada */
+#cart-select option:checked {
+    background-color: #007bff;
+    /* Color de fondo para la opción seleccionada */
+    color: white;
+    /* Color del texto para la opción seleccionada */
+}
+
+/* Estilo para las opciones del carrito */
+.cart-option {
+    padding: 10px;
+    /* Espaciado interno */
+    cursor: pointer;
+    /* Cambiar cursor al pasar */
+    transition: background-color 0.3s;
+    /* Transición suave para el fondo */
+}
+
+/* Estilo para la opción seleccionada en el dropdown */
+.cart-option.selected {
+    background-color: #d3d3d3;
+    /* Color de fondo gris claro */
+    color: #007bff;
+    /* Color del texto azul (color del navbar) */
+    font-weight: bold;
+    /* Negrita */
+}
+
+/* Estilo para el título del menú */
+#cart-label {
+    font-weight: bold;
+    /* Negrita */
+    padding: 10px;
+    /* Espaciado interno */
+    border-bottom: 1px solid #ccc;
+    /* Línea divisoria */
+    background-color: #f9f9f9;
+    /* Color de fondo del título */
+}
+
+#page {
+    width: 80px;
+    /* Establecer un ancho específico para el input de página */
+}
+
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 600px) {
+    #filter-form {
+        flex-direction: column;
+        /* Cambiar a columna en pantallas pequeñas */
+        align-items: flex-start;
+        /* Alinear a la izquierda */
+    }
+
+    #filter-form > div {
+        margin-right: 0;
+        /* Eliminar margen derecho */
+        margin-bottom: 10px;
+        /* Espaciado inferior entre grupos */
+        width: 100%;
+        /* Hacer que cada grupo ocupe el ancho completo */
+    }
 }

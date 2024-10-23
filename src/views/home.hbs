@@ -4,29 +4,54 @@
 
 <div id="filter-container">
     <form id="filter-form" method="GET" action="/">
-        <label for="limit">Límite:</label>
-        <select name="limit" id="limit">
-            <option value="5">5</option>
-            <option value="10" selected>10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-        </select>
+        <div>
+            <label for="limit">Límite:</label>
+            <select name="limit" id="limit">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select>
+        </div>
 
-        <label for="page">Página:</label>
-        <input type="number" name="page" id="page" value="{{page}}" min="1" />
+        <div>
+            <label for="page">Página:</label>
+            <input type="number" name="page" id="page" value="{{page}}" min="1" />
+        </div>
 
-        <label for="sort">Ordenar por precio:</label>
-        <select name="sort" id="sort">
-            <option value="">Sin ordenar</option>
-            <option value="asc" {{#if (eq sort "asc")}}selected{{/if}}>Ascendente</option>
-            <option value="desc" {{#if (eq sort "desc")}}selected{{/if}}>Descendente</option>
-        </select>
+        <div>
+            <label for="sort">Ordenar por precio:</label>
+            <select name="sort" id="sort">
+                <option value="">Sin ordenar</option>
+                <option value="asc" {{#if (eq sort "asc")}}selected{{/if}}>Ascendente</option>
+                <option value="desc" {{#if (eq sort "desc")}}selected{{/if}}>Descendente</option>
+            </select>
+        </div>
 
-        <label for="query">Buscar por categoría:</label>
-        <input type="text" name="query" id="query" placeholder="Categoría" value="{{query}}" />
+        <div>
+            <label for="query">Buscar por categoría:</label>
+            <input type="text" name="query" id="query" placeholder="Categoría" value="{{query}}" />
+        </div>
 
         <button type="submit">Filtrar</button>
     </form>
+</div>
+
+<!-- Ícono del carrito -->
+<div id="cart-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16">
+        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2" />
+    </svg>
+    <span id="cart-count" style="position: absolute; top: 0; right: 0; background: red; color: white; border-radius: 50%; padding: 2px 5px;">0</span>
+</div>
+
+<!-- Menú desplegable para seleccionar el carrito -->
+<div id="cart-dropdown">
+    <div id="cart-label">Seleccione un carrito:</div>
+    <div id="cart-options">
+        <div class="cart-option selected" data-cart-id="nuevo">Nuevo Carrito</div>
+        <!-- Las opciones de carrito se llenarán desde JavaScript -->
+    </div>
 </div>
 
 <div id="products-container">
@@ -36,7 +61,7 @@
             <div>
                 <span class="product-title">{{title}}</span>
                 <p class="product-price">${{price}}</p>
-                <button class="add-to-cart-btn" data-product-id="{{_id}}">Añadir al carrito</button>
+                <button class="add-to-cart-btn" data-product-id="{{_id}}" data-product-title="{{title}}">Añadir al carrito</button>
             </div>
         </article>
     {{/each}}
