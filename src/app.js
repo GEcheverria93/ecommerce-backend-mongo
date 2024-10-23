@@ -36,6 +36,10 @@ app.engine(
                     0
                 ),
             eq: (a, b) => a === b,
+            gt: (a, b) => a > b,
+            lt: (a, b) => a < b,
+            inc: (value) => value + 1,
+            dec: (value) => value - 1,
         },
     })
 );
