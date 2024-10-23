@@ -1,7 +1,9 @@
 <div id='cart-container'>
-    <ul id='cart-list'>
+    <h1>Lista de Carritos</h1>
+    <!-- Título de la lista de carritos -->
+    <div id='cart-list'>
         {{#each carts}}
-            <li>
+            <div class='cart-card'>
                 <h2>Carrito ID: {{_id}}</h2>
                 <ul>
                     {{#each products}}
@@ -16,13 +18,20 @@
                 </ul>
                 <div class='total-price'>
                     Total: ${{calculateTotal products}}
-                    <!-- Calcular el total del carrito -->
                 </div>
                 <button class='btn-buy' data-cart-id='{{_id}}'>Comprar</button>
                 <button class='btn-clear' data-cart-id='{{_id}}'>Limpiar carrito</button>
-            </li>
+            </div>
         {{/each}}
-    </ul>
+    </div>
+    <div id='pagination'>
+        {{#if (gt currentPage 1)}}
+            <a href='/carts?page={{dec currentPage}}&limit=10'>Anterior</a>
+        {{/if}}
+        {{#if (lt currentPage totalPages)}}
+            <a href='/carts?page={{inc currentPage}}&limit=10'>Siguiente</a>
+        {{/if}}
+    </div>
 </div>
 
 <link rel='stylesheet' href='/css/cart.css' />

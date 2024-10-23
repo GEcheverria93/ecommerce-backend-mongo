@@ -1,39 +1,117 @@
 /* Estilos para el carrito */
+body {
+    font-family: Arial, sans-serif;
+    /* Fuente general */
+    background-color: #f0f4f8;
+    /* Color de fondo */
+}
+
 #cart-container {
-    margin: 20px;
+    margin: 40px 100px;
+    /* Agregar margen a los lados para evitar scroll horizontal */
+}
+
+h1 {
+    text-align: center;
+    /* Centrar el título */
+    color: #333;
+    /* Color del texto */
+    padding-bottom: 30px;
 }
 
 #cart-list {
-    list-style: none; /* Sin viñetas */
-    padding: 0; /* Sin padding */
+    display: flex;
+    /* Usar flexbox para el diseño de tarjetas */
+    flex-wrap: wrap;
+    /* Permitir que las tarjetas se envuelvan */
+    gap: 20px;
+    /* Espacio entre tarjetas */
+    justify-content: center;
+    /* Centrar las tarjetas */
 }
 
-#cart-list li {
-    margin-bottom: 15px; /* Espaciado entre carritos */
-    padding: 10px; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde */
-    border-radius: 5px; /* Bordes redondeados */
-    background-color: #f9f9f9; /* Color de fondo */
+.cart-card {
+    flex: 1 1 calc(25% - 20px);
+    /* Ajustar el tamaño de las tarjetas */
+    border: 1px solid #ccc;
+    /* Borde */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    background-color: #ffffff;
+    /* Color de fondo */
+    padding: 15px;
+    /* Espaciado interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra */
+    transition: transform 0.2s;
+    /* Transición suave */
+}
+
+.cart-card:hover {
+    transform: scale(1.05);
+    /* Efecto de hover */
 }
 
 .total-price {
-    font-weight: bold; /* Negrita */
-    margin: 10px 0; /* Margen */
+    font-weight: bold;
+    /* Negrita */
+    margin: 10px 0;
+    /* Margen */
 }
 
 .btn-buy,
 .btn-clear {
-    background-color: #007bff; /* Color del botón */
-    border: none; /* Sin borde */
-    border-radius: 3px; /* Bordes redondeados */
-    color: white; /* Color del texto */
-    cursor: pointer; /* Cambiar cursor al pasar */
-    padding: 10px; /* Espaciado interno */
-    margin-top: 10px; /* Margen superior */
-    width: 100%; /* Ancho completo */
+    background-color: #007bff;
+    /* Color del botón */
+    border: none;
+    /* Sin borde */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    color: white;
+    /* Color del texto */
+    cursor: pointer;
+    /* Cambiar cursor al pasar */
+    padding: 10px;
+    /* Espaciado interno */
+    margin-top: 10px;
+    /* Margen superior */
+    width: 100%;
+    /* Ancho completo */
+    transition: background-color 0.3s;
+    /* Transición suave */
 }
 
 .btn-buy:hover,
 .btn-clear:hover {
-    background-color: #0056b3; /* Color al pasar el mouse */
+    background-color: #0056b3;
+    /* Color al pasar el mouse */
+}
+
+#pagination {
+    text-align: center;
+    /* Centrar los botones de paginación */
+    margin-top: 20px;
+    /* Margen superior */
+}
+
+#pagination a {
+    background-color: #007bff;
+    /* Color del botón */
+    color: white;
+    /* Color del texto */
+    padding: 10px 15px;
+    /* Espaciado interno */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    margin: 0 5px;
+    /* Espacio entre botones */
+    text-decoration: none;
+    /* Sin subrayado */
+    transition: background-color 0.3s;
+    /* Transición suave */
+}
+
+#pagination a:hover {
+    background-color: #0056b3;
+    /* Color al pasar el mouse */
 }

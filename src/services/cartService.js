@@ -167,9 +167,13 @@ const clearCart = async (req, res) => {
     }
 };
 
-const getAllCarts = async () => {
+const getAllCarts = async (page = 1, limit = 10) => {
     try {
-        return await Cart.find().populate('products.product'); // Obtener todos los carritos y hacer populate de los productos
+        const skip = (page - 1) * limit;
+        return await Cart.find()
+            .populate('products.product')
+            .skip(skip)
+            .limit(limit); // Limitar la cantidad de carritos devueltos
     } catch (error) {
         throw new Error(`Error al obtener los carritos: ${error.message}`);
     }

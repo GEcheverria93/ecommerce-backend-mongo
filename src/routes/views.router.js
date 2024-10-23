@@ -2,6 +2,7 @@
 const express = require('express');
 const { getAllProducts } = require('../services/productService');
 const { getAllCarts } = require('../services/cartService'); // Importar la nueva función para obtener carritos
+const Cart = require('../models/cart.model');
 
 const router = express.Router();
 
@@ -29,11 +30,17 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/carts', async (req, res) => {
+    const page = parseInt(req.query.page, 10) || 1; // Obtener la página actual
+    const limit = parseInt(req.query.limit, 10) || 10; // Obtener el límite
+
     try {
-        const carts = await getAllCarts(); // Obtener los carritos desde la base de datos
+        const totalCarts = await Cart.countDocuments(); // Contar el total de carritos
+        const carts = await getAllCarts(page, limit); // Obtener los carritos desde la base de datos
         res.render('carts', {
             title: 'Carritos de Compras',
             carts, // Pasar los carritos directamente a la vista
+            currentPage: page,
+            totalPages: Math.ceil(totalCarts / limit), // Calcular el total de páginas
         });
     } catch (error) {
         console.error('Error al obtener carritos:', error);
