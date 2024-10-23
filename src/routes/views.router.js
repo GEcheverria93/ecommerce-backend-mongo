@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         const result = await getAllProducts(req, res); // Llama a la función que maneja la lógica de paginación y filtrado
+
         res.render('home', {
             products: result.payload, // Usa el payload para los productos
             title: 'Tienda',
@@ -27,11 +28,11 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/cart', async (req, res) => {
+router.get('/carts', async (req, res) => {
     try {
         const carts = await getAllCarts(); // Obtener los carritos desde la base de datos
-        res.render('cart', {
-            title: 'Carrito de Compras',
+        res.render('carts', {
+            title: 'Carritos de Compras',
             carts, // Pasar los carritos directamente a la vista
         });
     } catch (error) {
