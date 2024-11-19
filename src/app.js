@@ -2,10 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
 const productRoutes = require('./routes/productRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const viewsRoutes = require('./routes/viewsRoutes');
 const connectDB = require('./db');
+const initializePassport = require('./config/passportConfig');
+const sessionRoutes = require('./routes/sessionRoutes');
 
 const app = express();
 
@@ -15,6 +19,9 @@ connectDB();
 // middlewares
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+app.use(passport.initialize());
+initializePassport();
 
 // Configuración de Handlebars con extensión '.hbs'
 app.engine(
@@ -54,6 +61,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Rutas de la api
 app.use('/api/carts', cartRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/sessions', sessionRoutes);
 
 // Rutas para las vistas
 app.use('/', viewsRoutes);
