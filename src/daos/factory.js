@@ -1,6 +1,7 @@
 const UserDAO = require('./mongodb/userDao');
 const ProductDAO = require('./mongodb/productDao');
 const CartDAO = require('./mongodb/cartDao');
+const TicketDAO = require('./mongodb/ticketDAO');
 
 class DAOFactory {
     static getUserDAO() {
@@ -13,6 +14,10 @@ class DAOFactory {
 
     static getCartDAO() {
         return new CartDAO();
+    }
+
+    static getTicketDAO() {
+        return new TicketDAO();
     }
 }
 

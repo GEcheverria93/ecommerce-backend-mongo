@@ -68,6 +68,21 @@ class CartController {
         }
     }
 
+    async purchase(req, res) {
+        try {
+            const { cid } = req.params;
+            const userEmail = req.body.email;
+
+            const purchase = await CartService.purchase(cid, userEmail);
+            res.json(purchase);
+        } catch (error) {
+            res.status(500).json({
+                message: 'Error al realizar la compra',
+                error: error.message,
+            });
+        }
+    }
+
     async updateCart(req, res) {
         try {
             const { cid } = req.params;
@@ -137,7 +152,7 @@ class CartController {
                     .status(404)
                     .json({ message: 'Carrito no encontrado' });
             }
-            res.json({ message: 'Carrito vaciado con éxito' });
+            res.json({ message: 'Carrito vaciado con Ã©xito' });
         } catch (error) {
             res.status(500).json({
                 message: 'Error al vaciar el carrito',

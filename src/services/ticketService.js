@@ -1,12 +1,12 @@
 const uuid = require('uuid');
-const TicketDAO = require('../daos/mongodb/ticketDAO');
+const DAOFactory = require('../daos/factory');
 const TicketDTO = require('../dtos/ticketDTO');
 
 const { sendTicketMail } = require('../utils/sendEmail');
 
 class TicketService {
     constructor() {
-        this.ticketDao = new TicketDAO();
+        this.ticketDao = DAOFactory.getTicketDAO();
     }
 
     async create(amount, userEmail) {
