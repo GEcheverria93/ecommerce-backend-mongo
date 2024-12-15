@@ -1,35 +1,50 @@
+{{!-- Contenedor principal del mensaje de error --}}
 <div class="error-container">
+    {{!-- Título de la página de error --}}
     <h1>Error</h1>
+
+    {{!-- Contenedor del mensaje de error --}}
     <div class="error-message">
+        {{!-- Condicional para mostrar mensaje de error --}}
         {{#if error}}
+            {{!-- Si hay un mensaje de error específico, lo muestra --}}
             <p>{{error}}</p>
         {{else}}
+            {{!-- Si no hay mensaje específico, muestra mensaje por defecto --}}
             <p>Ha ocurrido un error inesperado</p>
         {{/if}}
     </div>
+
+    {{!-- Botón para volver a la página principal --}}
     <a href="/" class="btn-home">Volver al inicio</a>
 </div>
 
+{{!-- Estilos CSS incorporados --}}
 <style>
+    /* Estilo del contenedor principal */
     .error-container {
-        text-align: center;
-        padding: 2rem;
-        max-width: 600px;
-        margin: 2rem auto;
+        text-align: center;          /* Centra el contenido */
+        padding: 2rem;               /* Espaciado interno */
+        max-width: 600px;           /* Ancho máximo */
+        margin: 2rem auto;          /* Centrado horizontal y margen vertical */
     }
+
+    /* Estilo del contenedor del mensaje de error */
     .error-message {
-        background-color: #fff3f3;
-        border: 1px solid #ffcdd2;
-        padding: 1rem;
-        border-radius: 4px;
-        margin: 1rem 0;
+        background-color: #fff3f3;   /* Fondo rojo claro */
+        border: 1px solid #ffcdd2;   /* Borde rojo claro */
+        padding: 1rem;               /* Espaciado interno */
+        border-radius: 4px;          /* Bordes redondeados */
+        margin: 1rem 0;              /* Margen vertical */
     }
+
+    /* Estilo del botón de retorno */
     .btn-home {
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 4px;
+        display: inline-block;       /* Comportamiento inline con propiedades de bloque */
+        padding: 0.5rem 1rem;        /* Espaciado interno */
+        background-color: #007bff;   /* Color de fondo azul */
+        color: white;                /* Texto blanco */
+        text-decoration: none;       /* Sin subrayado */
+        border-radius: 4px;          /* Bordes redondeados */
     }
 </style> 

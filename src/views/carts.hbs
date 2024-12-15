@@ -1,40 +1,62 @@
+{{!-- Contenedor principal de carritos --}}
 <div id='cart-container'>
+    {{!-- Título de la sección --}}
     <h1>Lista de Carritos</h1>
+
+    {{!-- Contenedor de la lista de carritos --}}
     <div id='cart-list'>
+        {{!-- Iteración sobre cada carrito --}}
         {{#each carts}}
             <div class='cart-card'>
+                {{!-- Identificador del carrito --}}
                 <h2>Carrito ID: {{id}}</h2>
+                {{!-- Lista de productos en el carrito --}}
                 <ul>
+                    {{!-- Iteración sobre cada producto del carrito --}}
                     {{#each products}}
                         <li>
+                            {{!-- Información del producto: título, cantidad y precio --}}
                             Producto: {{this.product.title}} - Cantidad: <span class="quantity">{{this.quantity}}</span> - Precio: ${{this.product.price}}
+                            {{!-- Grupo de botones para cada producto --}}
                             <div class="button-group">
+                                {{!-- Botón para aumentar cantidad --}}
                                 <button class='btn-increase' data-cart-id='{{../id}}' data-product-id='{{this.product.id}}'>+</button>
+                                {{!-- Botón para disminuir cantidad --}}
                                 <button class='btn-decrease' data-cart-id='{{../id}}' data-product-id='{{this.product.id}}'>-</button>
+                                {{!-- Botón para eliminar producto --}}
                                 <button class='btn-remove' data-cart-id='{{../id}}' data-product-id='{{this.product.id}}'>Eliminar</button>
                             </div>
                         </li>
                     {{/each}}
                 </ul>
+                {{!-- Total del carrito calculado con helper --}}
                 <div class='total-price'>
                     Total: ${{calculateTotal products}}
                 </div>
+                {{!-- Botón para eliminar todo el carrito --}}
                 <button class='btn-remove btn-delete-cart' data-cart-id='{{id}}'>Eliminar Carrito</button>
             </div>
         {{/each}}
     </div>
+
+    {{!-- Sistema de paginación --}}
     <div id='pagination'>
+        {{!-- Link a página anterior si existe --}}
         {{#if (gt currentPage 1)}}
             <a href='/carts?page={{dec currentPage}}&limit=10'>Anterior</a>
         {{/if}}
+        {{!-- Link a página siguiente si hay más páginas --}}
         {{#if (lt currentPage totalPages)}}
             <a href='/carts?page={{inc currentPage}}&limit=10'>Siguiente</a>
         {{/if}}
     </div>
+
+    {{!-- Botón para eliminar todos los carritos (solo visible si hay carritos) --}}
     {{#if carts.length}}
         <button id='btn-clear-all'>Eliminar Todos los Carritos</button>
     {{/if}}
 </div>
 
+{{!-- Vinculación de archivos externos --}}
 <link rel='stylesheet' href='/css/carts.css' />
 <script src='/js/carts.js' defer></script>

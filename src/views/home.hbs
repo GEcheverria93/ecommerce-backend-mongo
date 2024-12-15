@@ -1,9 +1,13 @@
+{{!-- Encabezado de la página --}}
 <header>
     <h1>Bienvenido a la Tienda Electrónica</h1>
 </header>
 
+{{!-- Contenedor de filtros para productos --}}
 <div id="filter-container">
+    {{!-- Formulario de filtros con método GET --}}
     <form id="filter-form" method="GET" action="/">
+        {{!-- Selector de límite de productos por página --}}
         <div>
             <label for="limit">Límite:</label>
             <select name="limit" id="limit">
@@ -14,20 +18,24 @@
             </select>
         </div>
 
+        {{!-- Input para seleccionar número de página --}}
         <div>
             <label for="page">Página:</label>
             <input type="number" name="page" id="page" value="{{page}}" min="1" />
         </div>
 
+        {{!-- Selector para ordenar productos por precio --}}
         <div>
             <label for="sort">Ordenar por precio:</label>
             <select name="sort" id="sort">
                 <option value="">Sin ordenar</option>
+                {{!-- Opciones con helper 'eq' para mantener selección --}}
                 <option value="asc" {{#if (eq sort "asc")}}selected{{/if}}>Ascendente</option>
                 <option value="desc" {{#if (eq sort "desc")}}selected{{/if}}>Descendente</option>
             </select>
         </div>
 
+        {{!-- Campo de búsqueda por categoría --}}
         <div>
             <label for="query">Buscar por categoría:</label>
             <input type="text" name="query" id="query" placeholder="Categoría" value="{{query}}" />
@@ -37,45 +45,57 @@
     </form>
 </div>
 
-<!-- Ícono del carrito -->
+{{!-- Ícono del carrito con contador --}}
 <div id="cart-icon">
+    {{!-- SVG del ícono del carrito --}}
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16">
         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607L1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4a2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4a2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2a1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2a1 1 0 0 1 0-2" />
     </svg>
+    {{!-- Contador de items en el carrito --}}
     <span id="cart-count" style="position: absolute; top: 0; right: 0; background: red; color: white; border-radius: 50%; padding: 2px 5px;">0</span>
 </div>
 
-<!-- Menú desplegable para seleccionar el carrito -->
+{{!-- Menú desplegable para selección de carrito --}}
 <div id="cart-dropdown">
     <div id="cart-label">Seleccione un carrito:</div>
     <div id="cart-options">
         <div class="cart-option selected" data-cart-id="nuevo">Nuevo Carrito</div>
-        <!-- Las opciones de carrito se llenarán desde JavaScript -->
+        {{!-- Las opciones de carrito se llenarán dinámicamente con JavaScript --}}
     </div>
 </div>
 
+{{!-- Contenedor de productos --}}
 <div id="products-container">
+    {{!-- Iteración sobre cada producto --}}
     {{#each products}}
         <article class="product">
+            {{!-- Imagen del producto --}}
             <img src="./images/{{thumbnails.[0]}}" alt="{{title}}" />
             <div>
+                {{!-- Información del producto --}}
                 <span class="product-title">{{title}}</span>
                 <p class="product-price">${{price}}</p>
+                {{!-- Botón para añadir al carrito con datos del producto --}}
                 <button class="add-to-cart-btn" data-product-id="{{id}}" data-product-title="{{title}}">Añadir al carrito</button>
             </div>
         </article>
     {{/each}}
 </div>
 
+{{!-- Sistema de paginación --}}
 <div id="pagination">
+    {{!-- Link a página anterior si existe --}}
     {{#if hasPrevPage}}
         <a href="/?page={{prevPage}}&limit={{../limit}}&sort={{../sort}}&query={{../query}}">Página Anterior</a>
     {{/if}}
+    {{!-- Indicador de página actual --}}
     <span>Página {{page}} de {{totalPages}}</span>
+    {{!-- Link a página siguiente si existe --}}
     {{#if hasNextPage}}
         <a href="/?page={{nextPage}}&limit={{../limit}}&sort={{../sort}}&query={{../query}}">Página Siguiente</a>
     {{/if}}
 </div>
 
+{{!-- Vinculación de archivos externos --}}
 <link rel="stylesheet" href="/css/home.css" />
 <script src="/js/home.js" defer></script>

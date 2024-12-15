@@ -1,38 +1,53 @@
+{{!-- Contenedor principal del perfil --}}
 <div class="profile-container">
+    {{!-- Título de la página --}}
     <h1>Perfil de Usuario</h1>
 
+    {{!-- Sección de información del usuario --}}
     <div class="profile-info">
+        {{!-- Grupo de información: Nombre completo --}}
         <div class="info-group">
             <label>Nombre:</label>
+            {{!-- Muestra el nombre completo usando la variable user.fullName --}}
             <p>{{user.fullName}}</p>
         </div>
+        {{!-- Grupo de información: Email --}}
         <div class="info-group">
             <label>Email:</label>
             <p>{{user.email}}</p>
         </div>
+        {{!-- Grupo de información: Rol del usuario --}}
         <div class="info-group">
             <label>Rol:</label>
             <p>{{user.role}}</p>
         </div>
+        {{!-- Grupo de información: Último acceso --}}
         <div class="info-group">
             <label>Último acceso:</label>
             <p>{{user.lastLogin}}</p>
         </div>
     </div>
 
+    {{!-- Sección de botones de acción --}}
     <div class="actions">
+        {{!-- Enlace para ver carritos --}}
         <a href="/carts" class="btn">Ver mis carritos</a>
+        {{!-- Botón para cerrar sesión --}}
         <button id="logoutBtn" class="btn btn-danger">Cerrar sesión</button>
     </div>
 </div>
 
+{{!-- Script para manejar el cierre de sesión --}}
 <script>
+    // Agregamos evento click al botón de logout
     document.getElementById('logoutBtn').addEventListener('click', async () => {
         try {
+            // Realizamos petición POST al endpoint de logout
             const response = await fetch('/api/sessions/logout', {
                 method: 'POST'
             });
 
+            // Si la respuesta es exitosa, redirigimos al login
             if (response.ok) {
                 window.location.href = '/login';
             } else {
@@ -44,7 +59,9 @@
     });
 </script>
 
+{{!-- Estilos CSS incorporados --}}
 <style>
+    /* Estilo del contenedor principal */
     .profile-container {
         max-width: 600px;
         margin: 2rem auto;
@@ -52,27 +69,33 @@
         border: 1px solid #ddd;
         border-radius: 8px;
     }
+    /* Estilo de la sección de información */
     .profile-info {
         margin: 2rem 0;
     }
+    /* Estilo de cada grupo de información */
     .info-group {
         margin: 1rem 0;
     }
+    /* Estilo de las etiquetas */
     .info-group label {
         font-weight: bold;
         margin-right: 1rem;
     }
+    /* Estilo del contenedor de botones */
     .actions {
         display: flex;
         gap: 1rem;
         margin-top: 2rem;
     }
+    /* Estilo base para botones */
     .btn {
         padding: 0.5rem 1rem;
         border-radius: 4px;
         text-decoration: none;
         cursor: pointer;
     }
+    /* Estilo específico para botón de peligro */
     .btn-danger {
         background-color: #dc3545;
         color: white;

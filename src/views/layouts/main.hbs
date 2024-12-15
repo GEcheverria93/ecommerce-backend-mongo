@@ -1,13 +1,27 @@
+{{!-- Declaración del documento HTML con idioma inglés --}}
 <html lang='en'>
     <head>
+        {{!-- Metadatos básicos --}}
+        {{!-- Definición del conjunto de caracteres UTF-8 --}}
         <meta charset='UTF-8' />
+        {{!-- Configuración de la vista para dispositivos móviles --}}
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+        {{!-- Hojas de estilo CSS --}}
+        {{!-- Estilos generales del layout --}}
         <link rel='stylesheet' href='/css/layout.css' />
+        {{!-- Estilos específicos de la barra de navegación --}}
         <link rel='stylesheet' href='/css/navbar.css' />
+
+        {{!-- Título dinámico de la página --}}
         <title>{{title}}</title>
     </head>
     <body>
-        {{> navbar}} <!-- Incluye el navbar -->
+        {{!-- Inclusión del partial de la barra de navegación --}}
+        {{> navbar}}
+
+        {{!-- Contenido dinámico de la página --}}
+        {{!-- Las tres llaves {{{body}}} permiten renderizar HTML sin escape --}}
         {{{body}}}
     </body>
 </html>
