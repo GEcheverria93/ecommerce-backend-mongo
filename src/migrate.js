@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const connectDB = require('./db');
-const Product = require('./models/productModel');
-const Cart = require('./models/cartModel');
-const User = require('./models/userModel');
+const Product = require('./daos/mongodb/models/productModel');
+const Cart = require('./daos/mongodb/models/cartModel');
+const User = require('./daos/mongodb/models/userModel');
 
 dotenv.config();
 

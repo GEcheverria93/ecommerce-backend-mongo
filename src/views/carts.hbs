@@ -3,15 +3,15 @@
     <div id='cart-list'>
         {{#each carts}}
             <div class='cart-card'>
-                <h2>Carrito ID: {{_id}}</h2>
+                <h2>Carrito ID: {{id}}</h2>
                 <ul>
                     {{#each products}}
                         <li>
                             Producto: {{this.product.title}} - Cantidad: <span class="quantity">{{this.quantity}}</span> - Precio: ${{this.product.price}}
                             <div class="button-group">
-                                <button class='btn-increase' data-cart-id='{{../_id}}' data-product-id='{{this.product._id}}'>+</button>
-                                <button class='btn-decrease' data-cart-id='{{../_id}}' data-product-id='{{this.product._id}}'>-</button>
-                                <button class='btn-remove' data-cart-id='{{../_id}}' data-product-id='{{this.product._id}}'>Eliminar</button>
+                                <button class='btn-increase' data-cart-id='{{../id}}' data-product-id='{{this.product.id}}'>+</button>
+                                <button class='btn-decrease' data-cart-id='{{../id}}' data-product-id='{{this.product.id}}'>-</button>
+                                <button class='btn-remove' data-cart-id='{{../id}}' data-product-id='{{this.product.id}}'>Eliminar</button>
                             </div>
                         </li>
                     {{/each}}
@@ -19,7 +19,7 @@
                 <div class='total-price'>
                     Total: ${{calculateTotal products}}
                 </div>
-                <button class='btn-remove btn-delete-cart' data-cart-id='{{_id}}'>Eliminar Carrito</button>
+                <button class='btn-remove btn-delete-cart' data-cart-id='{{id}}'>Eliminar Carrito</button>
             </div>
         {{/each}}
     </div>

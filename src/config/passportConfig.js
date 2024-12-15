@@ -1,6 +1,6 @@
 const passport = require('passport');
 const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt');
-const User = require('../models/userModel');
+const User = require('../daos/mongodb/models/userModel');
 
 const cookieExtractor = (req) => {
     let token = null;

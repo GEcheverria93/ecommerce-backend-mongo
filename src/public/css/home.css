@@ -218,7 +218,7 @@ header {
     /* Asegurarse de que el formulario ocupe todo el ancho */
 }
 
-#filter-form > div {
+#filter-form>div {
     display: flex;
     /* Usar flexbox para cada grupo de filtros */
     align-items: center;
@@ -272,7 +272,7 @@ header {
 #cart-icon {
     position: absolute;
     /* Cambiar a posición absoluta */
-    top: 20px;
+    top: 60px;
     /* Ajustar la distancia desde la parte superior */
     right: 20px;
     /* Ajustar la distancia desde la derecha */
@@ -429,7 +429,7 @@ header {
         /* Alinear a la izquierda */
     }
 
-    #filter-form > div {
+    #filter-form>div {
         margin-right: 0;
         /* Eliminar margen derecho */
         margin-bottom: 10px;

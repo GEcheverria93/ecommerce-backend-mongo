@@ -1,0 +1,81 @@
+<div class="profile-container">
+    <h1>Perfil de Usuario</h1>
+
+    <div class="profile-info">
+        <div class="info-group">
+            <label>Nombre:</label>
+            <p>{{user.fullName}}</p>
+        </div>
+        <div class="info-group">
+            <label>Email:</label>
+            <p>{{user.email}}</p>
+        </div>
+        <div class="info-group">
+            <label>Rol:</label>
+            <p>{{user.role}}</p>
+        </div>
+        <div class="info-group">
+            <label>Último acceso:</label>
+            <p>{{user.lastLogin}}</p>
+        </div>
+    </div>
+
+    <div class="actions">
+        <a href="/carts" class="btn">Ver mis carritos</a>
+        <button id="logoutBtn" class="btn btn-danger">Cerrar sesión</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+        try {
+            const response = await fetch('/api/sessions/logout', {
+                method: 'POST'
+            });
+
+            if (response.ok) {
+                window.location.href = '/login';
+            } else {
+                alert('Error al cerrar sesión');
+            }
+        } catch (error) {
+            alert('Error al conectar con el servidor');
+        }
+    });
+</script>
+
+<style>
+    .profile-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+    .profile-info {
+        margin: 2rem 0;
+    }
+    .info-group {
+        margin: 1rem 0;
+    }
+    .info-group label {
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+    .actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+    }
+</style> 

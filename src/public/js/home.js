@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (response.ok) {
                             alert('Nuevo carrito creado y producto añadido');
                             await loadCartList(); // Actualizar la lista de carritos
-                            selectedCartId = result._id; // Seleccionar automáticamente el nuevo carrito
+                            selectedCartId = result.id; // Seleccionar automáticamente el nuevo carrito
 
                             // Marcar el nuevo carrito como seleccionado
                             const newCartOption = document.querySelector(

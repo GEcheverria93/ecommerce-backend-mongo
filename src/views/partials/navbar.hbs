@@ -1,6 +1,22 @@
 <nav>
-    <ul>
-        <li><a href='/'>Inicio</a></li>
-        <li><a href='/carts'>Carritos</a></li>
+    <ul class='nav-left'>
+        {{#if user}}
+            <li><a href='/'>Inicio</a></li>
+            <li><a href='/carts'>Carritos</a></li>
+        {{else}}
+            <li><a href='/login'>Iniciar Sesión</a></li>
+            <li><a href='/register'>Registrarse</a></li>
+        {{/if}}
     </ul>
+    {{#if user}}
+        <ul class='nav-right'>
+            <li class='user-info'>
+                <a href='/profile' class='user-name'>{{user.first_name}}</a>
+                <button id='logoutBtn' class='btn-logout'>Cerrar Sesión</button>
+            </li>
+        </ul>
+    {{/if}}
 </nav>
+
+<link rel='stylesheet' href='/css/navbar.css' />
+<script src='/js/navbar.js' defer></script>
