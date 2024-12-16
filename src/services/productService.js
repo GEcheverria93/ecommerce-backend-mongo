@@ -34,21 +34,21 @@ class ProductService {
 
         // Obtención de productos con los filtros aplicados
         const result = await this.productDao.getAll({
-            limit: parseInt(limit, 10),    // Conversión a número
-            page: parseInt(page, 10),      // Conversión a número
-            sort,                          // Objeto de ordenamiento
-            filters,                       // Objeto de filtros
+            limit: parseInt(limit, 10), // Conversión a número
+            page: parseInt(page, 10), // Conversión a número
+            sort, // Objeto de ordenamiento
+            filters, // Objeto de filtros
         });
 
         // Retorno de objeto con información de paginación y productos
         return {
-            payload: result.products,           // Lista de productos
-            totalPages: result.totalPages,      // Total de páginas
-            prevPage: page > 1 ? parseInt(page, 10) - 1 : null,  // Página anterior
-            nextPage: page < result.totalPages ? parseInt(page, 10) + 1 : null,  // Página siguiente
-            page: parseInt(page, 10),           // Página actual
-            hasPrevPage: page > 1,             // Indicador de página anterior
-            hasNextPage: page < result.totalPages,  // Indicador de página siguiente
+            payload: result.products, // Lista de productos
+            totalPages: result.totalPages, // Total de páginas
+            prevPage: page > 1 ? parseInt(page, 10) - 1 : null, // Página anterior
+            nextPage: page < result.totalPages ? parseInt(page, 10) + 1 : null, // Página siguiente
+            page: parseInt(page, 10), // Página actual
+            hasPrevPage: page > 1, // Indicador de página anterior
+            hasNextPage: page < result.totalPages, // Indicador de página siguiente
         };
     }
 

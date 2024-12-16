@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-undef */
 document.addEventListener('DOMContentLoaded', () => {
-    const logoutBtn = document.getElementById('logoutBtn');
+    const logoutBtn = document.getElementById('profileLogoutBtn');
 
     logoutBtn?.addEventListener('click', async () => {
         try {

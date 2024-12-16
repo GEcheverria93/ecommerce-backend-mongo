@@ -3,9 +3,9 @@ const DAOFactory = require('../daos/factory');
 const TicketService = require('./ticketService');
 
 // Inicialización de DAOs y servicios
-const cartDao = DAOFactory.getCartDAO();          // DAO para carritos
-const productDao = DAOFactory.getProductDAO();     // DAO para productos
-const ticketService = new TicketService();         // Servicio de tickets
+const cartDao = DAOFactory.getCartDAO(); // DAO para carritos
+const productDao = DAOFactory.getProductDAO(); // DAO para productos
+const ticketService = new TicketService(); // Servicio de tickets
 
 class CartService {
     // Crear un nuevo carrito
@@ -55,8 +55,8 @@ class CartService {
         if (!cart) return null;
 
         let totalAmount = 0;
-        const failedProducts = [];      // Productos que no se pudieron comprar
-        const purchasedProducts = [];    // Productos comprados exitosamente
+        const failedProducts = []; // Productos que no se pudieron comprar
+        const purchasedProducts = []; // Productos comprados exitosamente
 
         // Procesar cada producto del carrito
         const productPromises = cart.products.map(async (cartItem) => {

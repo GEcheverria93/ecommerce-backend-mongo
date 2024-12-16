@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-/* eslint-disable no-restricted-globals */
+
 /* eslint-disable no-undef */
 
 // Agregamos un evento al botón de cerrar sesión

@@ -5,7 +5,11 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node src/index.js",
-        "dev": "nodemon src/index.js"
+        "dev": "nodemon src/index.js",
+        "lint": "eslint . --ext ts,tsx,js --report-unused-disable-directives --max-warnings 0",
+        "lint:fix": "npm run lint -- --fix",
+        "prettier": "prettier --ignore-path .gitignore '**/*.{js,ts,jsx,tsx,vue,astro}'",
+        "format": "npm run prettier -- --write"
     },
     "keywords": [],
     "author": "",

@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
 const express = require('express');
 const ViewController = require('../controllers/viewController');
 const { authenticateToken } = require('../middlewares/auth');
