@@ -1,14 +1,14 @@
 const express = require('express');
-const { generateUsers } = require('../utils/mocking');
-const User = require('../models/User'); // Ensure you have the User model
+const { generateUsers, generatePets } = require('../utils/mocking');
 const Pet = require('../models/Pet'); // Ensure you have the Pet model
+const Person = require('../models/Person');
 
 const router = express.Router();
 
 // Endpoint /mockingpets
 router.get('/mockingpets', (req, res) => {
-    // ...existing code for the /mockingpets endpoint...
-    res.send('Mocking pets endpoint');
+    const pets = generatePets(50);
+    res.json(pets);
 });
 
 // Endpoint /mockingusers
@@ -21,11 +21,20 @@ router.get('/mockingusers', (req, res) => {
 router.post('/generateData', async (req, res) => {
     const { users, pets } = req.body;
     try {
-        const generatedUsers = generateUsers(users);
-        const generatedPets = generatePets(pets);
+        const generatedUsers = await generateUsers(users);
+        const generatedPets = await generatePets(pets);
 
-        await User.insertMany(generatedUsers);
-        await Pet.insertMany(generatedPets);
+        const userPromises = generatedUsers.map((user) => {
+            const newUser = new Person(user);
+            return newUser.save();
+        });
+
+        const petPromises = generatedPets.map((pet) => {
+            const newPet = new Pet(pet);
+            return newPet.save();
+        });
+
+        await Promise.all([...userPromises, ...petPromises]);
 
         res.status(201).json({
             message: 'Data generated and inserted successfully',

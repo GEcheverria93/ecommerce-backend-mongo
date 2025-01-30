@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt');
 
-function generateUsers(num) {
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { faker } = require('@faker-js/faker');
+
+const generateUsers = async (num) => {
     const users = [];
     for (let i = 0; i < num; i++) {
         const user = {
@@ -12,6 +15,21 @@ function generateUsers(num) {
         users.push(user);
     }
     return users;
-}
+};
 
-module.exports = { generateUsers };
+const petTypes = ['perro', 'gato', 'leon', 'tigre', 'conejo', 'hamster'];
+
+const generatePets = async (num) => {
+    const pets = [];
+    for (let i = 0; i < num; i++) {
+        const pet = {
+            name: faker.person.firstName(),
+            type: petTypes[Math.floor(Math.random() * petTypes.length)],
+            age: Math.floor(Math.random() * 15) + 1,
+        };
+        pets.push(pet);
+    }
+    return pets;
+};
+
+module.exports = { generateUsers, generatePets };

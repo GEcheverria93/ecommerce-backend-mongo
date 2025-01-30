@@ -1,5 +1,3 @@
-require('events').EventEmitter.defaultMaxListeners = 20; // Increase the limit of listeners
-
 const express = require('express');
 const cors = require('cors');
 const exphbs = require('express-handlebars');
