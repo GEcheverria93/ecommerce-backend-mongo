@@ -10,14 +10,18 @@ dotenv.config();
 const connectDB = async () => {
     try {
         // Intentamos establecer conexión con MongoDB usando la URI definida en las variables de entorno
-        await mongoose.connect(process.env.MONGO_DB_URI);
+        await mongoose.connect('mongodb://localhost:27017/ecommerce', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+        });
         // Si la conexión es exitosa, mostramos mensaje en consola
-        console.log('Conectado a la base de datos');
+        console.log('MongoDB connected');
     } catch (error) {
         // Si ocurre un error durante la conexión
-        console.error('Error al conectar a la base de datos:', error);
+        console.error('Error connecting to MongoDB', error);
         // Terminamos el proceso con código de error (1)
-        process.exit(1); // Salir del proceso si hay un error
+        process.exit(1); // Exit process with failure
     }
 };
 

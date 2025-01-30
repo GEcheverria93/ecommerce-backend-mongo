@@ -1,3 +1,5 @@
+require('events').EventEmitter.defaultMaxListeners = 20; // Increase the limit of listeners
+
 const express = require('express');
 const cors = require('cors');
 const exphbs = require('express-handlebars');
@@ -10,10 +12,13 @@ const viewsRoutes = require('./routes/viewsRoutes');
 const connectDB = require('./db');
 const initializePassport = require('./config/passportConfig');
 const sessionRoutes = require('./routes/sessionRoutes');
+const mocksRouter = require('./routes/mocks.router'); // Import the new router
+const userRoutes = require('./routes/userRoutes');
+const petRoutes = require('./routes/petRoutes');
 
 const app = express();
 
-// Conectar a la base de datos
+// Connect to the database
 connectDB();
 
 // middlewares
@@ -23,7 +28,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 initializePassport();
 
-// Configuración de Handlebars con extensión '.hbs'
+// Handlebars configuration with '.hbs' extension
 app.engine(
     '.hbs',
     exphbs.engine({
@@ -51,19 +56,22 @@ app.engine(
     })
 );
 
-// Configuración del motor de vistas
-app.set('views', path.join(__dirname, 'views')); // Define la carpeta 'views'
-app.set('view engine', '.hbs'); // Configura el motor de vistas para usar .hbs
+// View engine configuration
+app.set('views', path.join(__dirname, 'views')); // Define the 'views' folder
+app.set('view engine', '.hbs'); // Configure the view engine to use .hbs
 
-// Archivos estáticos
+// Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rutas de la api
+// API routes
 app.use('/api/carts', cartRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/sessions', sessionRoutes);
+app.use('/api/mocks', mocksRouter); // Register the new router
+app.use('/api', userRoutes); // Register the user router
+app.use('/api/pets', petRoutes); // Register the pet router
 
-// Rutas para las vistas
+// View routes
 app.use('/', viewsRoutes);
 
 module.exports = app;
