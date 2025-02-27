@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+    title: Ecommerce API
+    version: 1.0.0
+    description: API documentation for the Ecommerce project
+
+paths:
+    /api/users:
+        get:
+            summary: Obtener todos los usuarios
+            tags:
+                - Users
+            responses:
+                '200':
+                    description: Lista de usuarios
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/User'
+                '500':
+                    description: Error al obtener usuarios
+
+components:
+    schemas:
+        User:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: ID del usuario
+                username:
+                    type: string
+                    description: Nombre de usuario
+                password:
+                    type: string
+                    description: Contraseña del usuario
+                role:
+                    type: string
+                    description: Rol del usuario
+                pets:
+                    type: array
+                    items:
+                        type: string
+                        description: ID de las mascotas del usuario
+            example:
+                id: 1
+                username: user1
+                password: $2b$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36FJQ4dZ3zZ3Z3Z3Z3Z3Z3Z
+                role: user
+                pets: [60d0fe4f5311236168a109ca, 60d0fe4f5311236168a109cb]

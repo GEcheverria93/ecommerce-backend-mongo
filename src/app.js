@@ -13,6 +13,7 @@ const sessionRoutes = require('./routes/sessionRoutes');
 const mocksRouter = require('./routes/mocks.router'); // Import the new router
 const userRoutes = require('./routes/userRoutes');
 const petRoutes = require('./routes/petRoutes');
+const swaggerDocs = require('./swagger');
 
 const app = express();
 
@@ -25,6 +26,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
 initializePassport();
+
+// Swagger setup
+swaggerDocs(app);
 
 // Handlebars configuration with '.hbs' extension
 app.engine(

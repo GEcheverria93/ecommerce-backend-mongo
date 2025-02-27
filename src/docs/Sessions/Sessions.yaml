@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+    title: Ecommerce API
+    version: 1.0.0
+    description: API documentation for the Ecommerce project
+
+paths:
+    /api/sessions/register:
+        post:
+            summary: Registrar un nuevo usuario
+            tags:
+                - Sessions
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/User'
+            responses:
+                '201':
+                    description: Usuario registrado exitosamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                '400':
+                    description: Error en el registro
+
+    /api/sessions/login:
+        post:
+            summary: Iniciar sesión de un usuario
+            tags:
+                - Sessions
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Login'
+            responses:
+                '200':
+                    description: Inicio de sesión exitoso
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/LoginResponse'
+                '401':
+                    description: Credenciales inválidas
+
+    /api/sessions/logout:
+        post:
+            summary: Cerrar sesión de un usuario
+            tags:
+                - Sessions
+            responses:
+                '200':
+                    description: Logout exitoso
+                '500':
+                    description: Error en el logout
+
+    /api/sessions/current:
+        get:
+            summary: Obtener la información del usuario actual
+            tags:
+                - Sessions
+            security:
+                - bearerAuth: []
+            responses:
+                '200':
+                    description: Información del usuario actual
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+                '401':
+                    description: No autorizado
+                '500':
+                    description: Error al obtener usuario actual
+
+components:
+    schemas:
+        User:
+            type: object
+            properties:
+                id:
+                    type: string
+                    description: ID del usuario
+                first_name:
+                    type: string
+                    description: Nombre del usuario
+                last_name:
+                    type: string
+                    description: Apellido del usuario
+                email:
+                    type: string
+                    description: Email del usuario
+                age:
+                    type: number
+                    description: Edad del usuario
+                role:
+                    type: string
+                    description: Rol del usuario
+                cart:
+                    type: string
+                    description: ID del carrito del usuario
+            example:
+                id: 1
+                first_name: Gabi
+                last_name: Echeverria
+                email: gabiEcheverria@gmail.com
+                age: 31
+                role: user
+                cart: 12345
+
+        Login:
+            type: object
+            properties:
+                email:
+                    type: string
+                    description: Email del usuario
+                password:
+                    type: string
+                    description: Contraseña del usuario
+            example:
+                email: gabiEcheverria@gmail.com
+                password: password123
+
+        LoginResponse:
+            type: object
+            properties:
+                token:
+                    type: string
+                    description: Token JWT
+                user:
+                    $ref: '#/components/schemas/User'
+            example:
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+                user:
+                    id: 1
+                    first_name: Gabi
+                    last_name: Echeverria
+                    email: gabiEcheverria@gmail.com
+                    age: 31
+                    role: user
+                    cart: 12345
+
+securitySchemes:
+    bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
