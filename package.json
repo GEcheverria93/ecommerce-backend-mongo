@@ -3,13 +3,17 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "testMocha": "mocha test/Users/Users.test.js",
+        "testChaiUser": "mocha test/Users/UsersChai.test.js",
+        "testChaiSessions": "mocha test/Sessions/SessionsC.test.js",
+        "testSuper": "mocha test/Users/UsersSupertest.test.js",
+        "testSuper1": "mocha test/Sessions/SessionsSuperTest.test.js",
         "start": "node src/index.js",
-        "dev": "nodemon src/index.js",
         "lint": "eslint . --ext ts,tsx,js --report-unused-disable-directives --max-warnings 0",
         "lint:fix": "npm run lint -- --fix",
         "prettier": "prettier --ignore-path .gitignore '**/*.{js,ts,jsx,tsx,vue,astro}'",
-        "format": "npm run prettier -- --write"
+        "format": "npm run prettier -- --write",
+        "dev": "nodemon src/index.js"
     },
     "keywords": [],
     "author": "",
@@ -17,6 +21,7 @@
     "description": "",
     "dependencies": {
         "@faker-js/faker": "^9.4.0",
+        "@jest/globals": "^29.7.0",
         "bcrypt": "^5.1.1",
         "cookie-parser": "^1.4.7",
         "cors": "^2.8.5",
@@ -29,17 +34,20 @@
         "nodemailer": "^6.9.16",
         "passport": "^0.7.0",
         "passport-jwt": "^4.0.1",
+        "supertest": "^7.0.0",
         "swagger-jsdoc": "^6.2.8",
         "swagger-ui-express": "^5.0.1",
         "uuid": "^11.0.3"
     },
     "devDependencies": {
+        "chai": "^5.2.0",
         "eslint": "^8.57.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-node": "^4.1.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prettier": "^5.2.1",
+        "mocha": "^11.1.0",
         "nodemon": "^3.1.4",
         "prettier": "^3.3.3"
     }
