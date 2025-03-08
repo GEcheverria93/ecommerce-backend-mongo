@@ -6,7 +6,7 @@ const app = require('../../src/app'); // Importa la aplicación Express
 
 const requester = supertest(app);
 
-describe('Rutas de sesiones (Register, Login, Current)', () => {
+describe('Rutas de sesion (Register, Login, Current)', () => {
     let expect;
     let user = {};
     let cookie = {};

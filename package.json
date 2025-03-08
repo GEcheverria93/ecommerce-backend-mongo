@@ -5,9 +5,11 @@
     "scripts": {
         "testMocha": "mocha test/Users/Users.test.js",
         "testChaiUser": "mocha test/Users/UsersChai.test.js",
-        "testChaiSessions": "mocha test/Sessions/SessionsC.test.js",
+        "testChaiSessions": "mocha test/Sessions/SessionsChai.test.js",
         "testSuper": "mocha test/Users/UsersSupertest.test.js",
         "testSuper1": "mocha test/Sessions/SessionsSuperTest.test.js",
+        "testSuper2": "mocha test/Products/ProductsSuperTest.test.js",
+        "testSuper3": "mocha test/Carts/CartsSuperTest.test.js",
         "start": "node src/index.js",
         "lint": "eslint . --ext ts,tsx,js --report-unused-disable-directives --max-warnings 0",
         "lint:fix": "npm run lint -- --fix",
